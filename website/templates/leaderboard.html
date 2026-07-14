@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .leaderboard-container {
+        width: 80%;
+        margin: auto;
+        margin-top: 2rem;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+        padding: 1rem;
+        text-align: center;
+    }
+
+    th {
+        background: #3a7ca5;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background: #f4f6f9;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        text-decoration: none;
+        color: #3a7ca5;
+    }
+</style>
+
+<div class="leaderboard-container">
+    <h2>🏆 Reading Leaderboard</h2>
+
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>User</th>
+            <th>Pages Read</th>
+            <th>Books Completed</th>
+            <th>Streak (days)</th>
+        </tr>
+
+        {% for user in leaderboard %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.pages }}</td>
+            <td>{{ user.books }}</td>
+            <td>{{ user.streak }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ url_for('home.dashboard_home') }}" class="back-btn">← Back to Dashboard</a>
+</div>
+
+{% endblock %}

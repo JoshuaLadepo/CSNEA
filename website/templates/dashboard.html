@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Reading Tracker</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    .navbar {
+      background-color: #3a7ca5;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      align-items: center;
+    }
+
+    .logout-btn {
+      color: white;
+      text-decoration: none;
+      background: #e74c3c;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #c0392b;
+    }
+
+    .dashboard-container {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .streak {
+      background: linear-gradient(135deg, #ffb347, #ffcc33);
+      color: #222;
+      font-weight: bold;
+    }
+
+    /* ✅ Log Reading Button Styling */
+    .log-btn {
+      display: inline-block;
+      margin-top: 2.5rem;
+      background: linear-gradient(135deg, #3a7ca5, #2e8b57);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .log-btn:hover {
+      background: linear-gradient(135deg, #2e8b57, #256d46);
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      background: #eaeaea;
+      color: #555;
+    }
+
+    .btn-history {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #3a7ca5;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
+    }
+
+  .btn-history:hover {
+     background: #2f6485;
+  }
+
+  .btn-action {
+    display: inline-block;
+    background: #3a7ca5;
+    color: white;
+    padding: 12px 18px;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.btn-action:hover {
+    background: #2f6485;
+}
+  </style>
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+    <h2>Welcome back, {{ username }} 👋</h2>
+
+    <div class="stats-grid">
+      <div class="card">
+        <h3>Total Books Read</h3>
+        <p>{{ stats.total_books }}</p>
+      </div>
+      <div class="card">
+        <h3>Total Pages Read</h3>
+        <p>{{ stats.total_pages }}</p>
+      </div>
+      <div class="card">
+        <h3>Total Reading Time</h3>
+        <p>{{ stats.total_time }} minutes</p>
+      </div>
+      <div class="card streak">
+        <h3>Current Streak</h3>
+        <p>{{ stats.streak }} days 🔥</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <a href="{{ url_for('home.history') }}" class="btn-history">📘 View Reading History</a>
+    </div>
+
+    <!-- ✅ Add the Log Reading Session Button here -->
+    <a href="{{ url_for('home.log_reading') }}" class="log-btn">+ Log Reading Session</a>
+
+    <a href="{{ url_for('home.leaderboard_page') }}" class="btn-action">🏆 View Leaderboard</a>
+
+    <div class="chart-section" style="margin-top: 3rem;">
+      <h3>Your Reading Progress</h3>
+      <p>📈 Visual reading analytics coming soon!</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Reading Tracker |</p>
+  </footer>
+</body>
+{% endblock %}

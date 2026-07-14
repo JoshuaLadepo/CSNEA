@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.admin-student-container{
+    max-width:1000px;
+    margin: auto;
+    padding : 2rem;
+}
+.section-title {
+    margin-bottom : 2rem;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+}
+.stat-card{
+    background: white;
+    padding: 1.2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.sort-controls {
+    margin: 1rem 0;
+}
+.sort-controls a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #3a7ca5;
+    font-weight: 600;
+}
+.sort-controls a:hover {
+    text-decoration: underline;
+}
+
+.log-list {
+    list-style: none;
+    padding: 0;
+}
+
+.log-item {
+    background: white;
+    margin-bottom: 10px;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+</style>
+
+<h2>Reading History - {{ student.username }}</h2>
+
+<div class="sort-controls">
+    <strong>Sort logs by:</strong>
+    <a href="?sort=date">Date</a> |
+    <a href="?sort=pages">Pages Read</a> |
+    <a href="?sort=duration">Duration</a>
+</div>
+
+<h3>Statistics</h3>
+<ul>
+    <li>Total Books: {{ stats.total_books }}</li>
+    <li>Total Pages: {{ stats.total_pages }}</li>
+    <li>Total Time: {{ stats.total_time }} minutes</li>
+</ul>
+
+<h3>Reading Logs</h3>
+
+{% if logs %}
+    <ul class="log-list">
+    {% for log in logs %}
+    <li class="log-item">
+        <div>
+            <strong>{{ log.book_title }}</strong><br>
+            Pages: {{ log.pages_read }} |
+            Duration: {{ log.duration }} min |
+            Date: {{ log.date }}
+        </div>
+
+        <form method="POST"
+              action="{{ url_for('admin.delete_student_log',
+              username=student.username,
+              index=loop.index0) }}">
+            <button type="submit" class="delete-btn">🗑 Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No reading sessions logged.</p>
+{% endif %}
+
+<a href="{{ url_for('admin.admin_dashboard') }}">← Back to Admin Dashboard</a>
+
+{% endblock %}

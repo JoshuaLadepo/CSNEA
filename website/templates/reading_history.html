@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f6f9;
+        }
+
+        .history-container {
+            width: 80%;
+            margin: auto;
+            margin-top: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: left;
+        }
+
+        th {
+            background: #3a7ca5;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f6fa;
+        }
+
+        tr:hover {
+            background: #e8f2f7;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 16px;
+            background: #3a7ca5;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #2f6485;
+        }
+    </style>
+</head>
+
+<div class="history-container">
+    <h2>📘 Reading History for {{ username }}</h2>
+
+    {% if logs %}
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Book Title</th>
+            <th>Pages Read</th>
+            <th>Duration (min)</th>
+        </tr>
+
+        {% for log in logs %}
+        <tr>
+            <td>{{ log.date }}</td>
+            <td>{{ log.book_title }}</td>
+            <td>{{ log.pages_read }}</td>
+            <td>{{ log.duration }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% else %}
+    <p style="text-align:center; color:#555; margin-top:20px;">
+        No reading logs yet — start by logging your first session!
+    </p>
+    {% endif %}
+
+    <a href="{{ url_for('home.dashboard_home') }}" class="back-btn">← Back to Dashboard</a>
+</div>
+
+{% endblock %}

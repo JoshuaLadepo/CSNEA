@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Reading Session</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+        input, button {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #3a7ca5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #2f6485;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Log Reading Session</h2>
+        <form method="POST">
+            <input type="text" name="book_title" placeholder="Book Title" required>
+            <input type="number" name="pages_read" placeholder="Pages Read" required>
+            <input type="number" name="duration" placeholder="Duration (minutes)" required>
+            <button type="submit">Save Log</button>
+        </form>
+        <a href="{{ url_for('home.dashboard_home') }}">← Back to Dashboard</a>
+    </div>
+</body>
+</html>

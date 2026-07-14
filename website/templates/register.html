@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset ="UTF-8">
+    <meta name = "viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Reading Tracker </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color : #f7f8fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 350px;
+
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column ;
+            gap: 15px;
+
+        }
+
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+
+        }
+        .link{
+            text-align: center;
+            margin-top: 10px;
+        
+        }
+
+        .link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .flash{
+            color: red;
+            text-align: center;
+        }
+    
+    </style>
+
+
+
+   
+</head>
+<body>
+    <div class="container">
+        <h2>Create an Account</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true)%}
+            {%if messages%}
+                {% for category, message in messages%}
+                    <div class="flash">{{message}}</div>
+                {% endfor %}
+            {% endif %}
+        {%endwith %}
+        <form action="{{url_for('auth.register')}}" method = "POST">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <input type="password" name="password" placeholder="Enter Password" required>
+
+            <label for ="role">Select Role:</label>
+            <select name="role" id="role">
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+            </select>
+
+            <button type="submit">Register</button>
+
+
+
+        </form>
+        <div class="link">
+            <p>Already have an account? <a href="{{url_for('auth.reading_tracker_login')}}">Login here</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+.admin-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem;
+}
+
+.student-list {
+    list-style: none;
+    padding: 0;
+}
+
+.student-list li {
+    background: white;
+    margin-bottom: 10px;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.student-list a {
+    text-decoration: none;
+    color: #3a7ca5;
+    font-weight: bold;
+}
+
+.student-list a:hover {
+    text-decoration: underline;
+}
+</style>
+
+
+<div class="admin-container">
+    <h2>Admin Dashboard</h2>
+    <p>Click a student to view reading logs and statistics.</p>
+
+    <ul class="student-list">
+        {% for student in students %}
+            <li>
+                {{ student.username }}
+                <a href="{{ url_for('admin.view_student_logs', username=student.username) }}">
+                    View Logs →
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
