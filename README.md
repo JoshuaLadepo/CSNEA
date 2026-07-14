@@ -1,4 +1,12 @@
 # Reading Tracker Web Application
+## Tech Stack
+
+- Python
+- Flask
+- HTML5
+- CSS3
+- JavaScript
+- SQLite
 
 ## Overview
 
